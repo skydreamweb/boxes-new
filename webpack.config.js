@@ -34,7 +34,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist')
 	},
 
-	plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin()],
+	plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' }), new webpack.ProgressPlugin()],
 
 	module: {
 		rules: [
@@ -55,6 +55,10 @@ module.exports = {
 						]
 					]
 				}
+			},
+			{
+				test: /\.html$/,
+				use: ['html-loader']
 			}
 		]
 	},

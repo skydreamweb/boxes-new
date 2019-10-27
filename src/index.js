@@ -2,7 +2,7 @@
 const canvas = new fabric.Canvas("c");
 
 import { createDesign } from './design';
-import { firstClick, regularClick, gameStart, gameStage, gameOver } from './functions';
+import { firstClick, regularClick, gameStart, gameStage, gameOver, resetGame } from './functions';
 
 createDesign(canvas, 500, 500, 50, 50);
 
@@ -13,12 +13,16 @@ canvas.on('mouse:down', function (e) {
 	if (gameStage === 'pre-game') {
 		gameStart();
 		// Passing e.target to clickedField argument of firstClick function
-		firstClick(canvas, coordinates, e, e.target);
+		firstClick(canvas, e, e.target);
 	} else if (gameStage === 'in-game') {
 		// Passing e.target to clickedField argument of regularClick function
-		regularClick(canvas, e, coordinates, e.target, gameOver);
+		regularClick(canvas, e, e.target, gameOver);
 	}
 	canvas.renderAll();
 });
 
 
+document.querySelector('#reset').addEventListener('click', function () {
+	createDesign(canvas, 500, 500, 50, 50);
+	resetGame();
+});

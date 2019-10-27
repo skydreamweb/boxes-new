@@ -1,31 +1,9 @@
 import { firstClickColor, regularClickColor, coordinatesColor } from './colors';
+import { coordinates } from './coordinates';
 
 let counterClick = 0;
 let counterTime = 0;
-// Define 'pre-game' status
-export let gameStage = 'pre-game';
-
-// Define time/click counters
-
 let int1 = 0;
-
-// Game start function - Change game status - Time / Score counter
-const gameStart = function () {
-	gameStage = 'in-game';
-	int1 = setInterval(() => {
-		counterTime += 1;
-		timer();
-
-	}, 1000);
-}
-
-// Game over function - Change game status
-export let gameOver = function () {
-	gameStage = 'game-over';
-
-	// Stop timer - setInterval from gameStart function
-	clearInterval(int1);
-};
 
 // Score function print in HTML
 const score = function () {
@@ -37,13 +15,41 @@ const timer = function () {
 	document.getElementById("time").innerHTML = counterTime;
 }
 
+export const resetGame = function () {
+	gameStage = 'pre-game';
+	counterClick = 0;
+	counterTime = 0;
+	int1 = 0;
+}
+
+// Define 'pre-game' status
+export let gameStage = 'pre-game';
+
+// Game start function - Change game status - Time / Score counter
+export const gameStart = function () {
+	gameStage = 'in-game';
+	int1 = setInterval(() => {
+		counterTime += 1;
+		timer();
+
+	}, 1000);
+}
+
+// Game over function - Change game status
+export const gameOver = function () {
+	gameStage = 'game-over';
+
+	// Stop timer - setInterval from gameStart function
+	clearInterval(int1);
+};
+
 // Setting 2 functions - First Click and any other Regular Click
 // First Click function
-const firstClick = function (canvas, coordinates, e, clickedField) {
+export const firstClick = function (canvas, e, clickedField) {
 	// First click add to counter
 
 	counterClick = counterClick + 1;
-	
+
 	timer();
 	score();
 
@@ -89,7 +95,7 @@ const firstClick = function (canvas, coordinates, e, clickedField) {
 }
 
 // Second += 1 click /Regular Click function 
-const regularClick = function (canvas, e, coordinates, clickedField, gameOver) {
+export const regularClick = function (canvas, e, clickedField, gameOver) {
 
 
 	// If statment - if clickedField has property yellow then fill green and change 
@@ -142,11 +148,10 @@ const regularClick = function (canvas, e, coordinates, clickedField, gameOver) {
 			}
 		}
 
-
 		// if not start gameOver() function
 		gameOver(e.target);
 	}
 }
 
 
-export { firstClick, regularClick, gameStart }
+

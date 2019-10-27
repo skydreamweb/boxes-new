@@ -1,15 +1,16 @@
 // Reference canvas element (with id="c")
-const canvas = new fabric.Canvas("c");
+import createDesign from './design';
+import {
+	firstClick, regularClick, gameStart, gameStage, gameOver, resetGame,
+} from './functions';
 
-import { createDesign } from './design';
-import { firstClick, regularClick, gameStart, gameStage, gameOver, resetGame } from './functions';
+const canvas = new fabric.Canvas('c');
 
 createDesign(canvas, 500, 500, 50, 50);
 
 
-
 // Click events and start game
-canvas.on('mouse:down', function (e) {
+canvas.on('mouse:down', (e) => {
 	if (gameStage === 'pre-game') {
 		gameStart();
 		// Passing e.target to clickedField argument of firstClick function
@@ -22,7 +23,7 @@ canvas.on('mouse:down', function (e) {
 });
 
 
-document.querySelector('#reset').addEventListener('click', function () {
+document.querySelector('#reset').addEventListener('click', () => {
 	createDesign(canvas, 500, 500, 50, 50);
 	resetGame();
 });

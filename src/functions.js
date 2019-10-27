@@ -1,54 +1,54 @@
 import { firstClickColor, regularClickColor, coordinatesColor } from './colors';
-import { coordinates } from './coordinates';
+import coordinates from './coordinates';
 
 let counterClick = 0;
 let counterTime = 0;
 let int1 = 0;
 
 // Score function print in HTML
-const score = function () {
-	document.getElementById("result").innerHTML = counterClick;
+function score() {
+	document.getElementById('result').innerHTML = counterClick;
 }
 
 // Timer function print in HTML
-const timer = function () {
-	document.getElementById("time").innerHTML = counterTime;
+function timer() {
+	document.getElementById('time').innerHTML = counterTime;
 }
 
-export const resetGame = function () {
+// Define 'pre-game' status
+export let gameStage = 'pre-game';
+
+export function resetGame() {
 	gameStage = 'pre-game';
 	counterClick = 0;
 	counterTime = 0;
 	int1 = 0;
 }
 
-// Define 'pre-game' status
-export let gameStage = 'pre-game';
 
 // Game start function - Change game status - Time / Score counter
-export const gameStart = function () {
+export function gameStart() {
 	gameStage = 'in-game';
 	int1 = setInterval(() => {
 		counterTime += 1;
 		timer();
-
 	}, 1000);
 }
 
 // Game over function - Change game status
-export const gameOver = function () {
+export function gameOver() {
 	gameStage = 'game-over';
 
 	// Stop timer - setInterval from gameStart function
 	clearInterval(int1);
-};
+}
 
 // Setting 2 functions - First Click and any other Regular Click
 // First Click function
-export const firstClick = function (canvas, e, clickedField) {
+export function firstClick(canvas, e, clickedField) {
 	// First click add to counter
 
-	counterClick = counterClick + 1;
+	counterClick += 1;
 
 	timer();
 	score();
@@ -73,16 +73,16 @@ export const firstClick = function (canvas, e, clickedField) {
 		// Push results object in array with properties x/y and value of coordinates
 		affectedFields.push({
 			x,
-			y
+			y,
 		});
 	}
 	// For loop trough all of 100 objects
 	for (let i = 0; i < e.target.canvas._objects.length; i += 1) {
 		// For loop trough affectedFields array
-		for (let j = 0; j < affectedFields.length; j++) {
+		for (let j = 0; j < affectedFields.length; j + 1) {
 			// If any of 100 object has the same x/y like objects in affectedFields
-			if (e.target.canvas._objects[i].x === affectedFields[j].x &&
-				e.target.canvas._objects[i].y === affectedFields[j].y) {
+			if (e.target.canvas._objects[i].x === affectedFields[j].x
+				&& e.target.canvas._objects[i].y === affectedFields[j].y) {
 				// Fill yellow and change color propety to yellow
 				e.target.canvas._objects[i].set('fill', coordinatesColor);
 				e.target.canvas._objects[i].color = coordinatesColor;
@@ -94,12 +94,10 @@ export const firstClick = function (canvas, e, clickedField) {
 	canvas.renderAll();
 }
 
-// Second += 1 click /Regular Click function 
-export const regularClick = function (canvas, e, clickedField, gameOver) {
-
-
-	// If statment - if clickedField has property yellow then fill green and change 
-	// the value of color propety to green 
+// Second += 1 click /Regular Click function
+export function regularClick(canvas, e, clickedField, gameOver) {
+	// If statment - if clickedField has property yellow then fill green and change
+	// the value of color propety to green
 	if (clickedField.color === coordinatesColor) {
 		clickedField.set('fill', regularClickColor);
 		clickedField.color = regularClickColor;
@@ -114,7 +112,7 @@ export const regularClick = function (canvas, e, clickedField, gameOver) {
 			// Push results in object in array with properties x/y and value of coordinates
 			affectedFields.push({
 				x,
-				y
+				y,
 			});
 		}
 		// Loop trough all of 100 objects and fill all fields with #fbfcf2 unless they are 'green'
@@ -124,11 +122,11 @@ export const regularClick = function (canvas, e, clickedField, gameOver) {
 				e.target.canvas._objects[i].set('fill', '#fbfcf2');
 				e.target.canvas._objects[i].color = 'white';
 
-				// Loop and fill all white fields following x,y coordinates 
+				// Loop and fill all white fields following x,y coordinates
 				for (let j = 0; j < coordinates.length; j += 1) {
-					// If object.x == affectedFields.x then color yellow  
-					if (e.target.canvas._objects[i].x === affectedFields[j].x &&
-						e.target.canvas._objects[i].y === affectedFields[j].y) {
+					// If object.x == affectedFields.x then color yellow
+					if (e.target.canvas._objects[i].x === affectedFields[j].x
+						&& e.target.canvas._objects[i].y === affectedFields[j].y) {
 						e.target.canvas._objects[i].set('fill', coordinatesColor);
 						e.target.canvas._objects[i].color = coordinatesColor;
 					}
@@ -140,11 +138,11 @@ export const regularClick = function (canvas, e, clickedField, gameOver) {
 
 		// Loop if there is yellow buttons left
 		for (let i = 0; i < e.target.canvas._objects.length; i += 1) {
-			if (e.target.canvas._objects[i].color == coordinatesColor) {
-				counterClick = counterClick + 1;
+			if (e.target.canvas._objects[i].color === coordinatesColor) {
+				counterClick += 1;
 				// If there is yellow buttons - repeat regularClick function
 				score();
-				return
+				return;
 			}
 		}
 
@@ -152,6 +150,3 @@ export const regularClick = function (canvas, e, clickedField, gameOver) {
 		gameOver(e.target);
 	}
 }
-
-
-

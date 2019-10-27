@@ -1,16 +1,15 @@
-import {backgroundColor } from './colors';
+import backgroundColor from './colors';
 
-export const createDesign = function (canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
+function createDesign(canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
 	// Sets width of this canvas instance
 	canvas.setWidth(fullWidth);
-	//Sets height of this canvas instance
+	// Sets height of this canvas instance
 	canvas.setHeight(fullHeight);
 
 	// Create grid 10*10
 	for (let i = 0; i < fullWidth / blockWidth; i += 1) {
 		for (let j = 0; j < fullHeight / blockHeight; j += 1) {
-
-			let rowOptions = {
+			const rowOptions = {
 				width: blockWidth,
 				height: blockHeight,
 				top: blockHeight * i,
@@ -27,14 +26,15 @@ export const createDesign = function (canvas, fullWidth, fullHeight, blockWidth,
 				y: i + 1,
 				idCColor: 'blank',
 				idRColor: 'blank',
-				color: 'white'
+				color: 'white',
 			};
 
 			// Rectangle class
-			let row = new fabric.Rect(rowOptions);
+			const row = new fabric.Rect(rowOptions);
 
-			// Adds objects to collection, Canvas or Group, then renders canvas 
+			// Adds objects to collection, Canvas or Group, then renders canvas
 			canvas.add(row);
 		}
 	}
 }
+export default createDesign;

@@ -10,7 +10,7 @@ import {
 	resetGame,
 } from './functions';
 
-let canvas = new fabric.Canvas('c');
+const canvas = new fabric.Canvas('c');
 
 createDesign(canvas, 500, 500, 50, 50);
 
@@ -28,7 +28,6 @@ canvas.on('mouse:down', (e) => {
 });
 
 document.querySelector('#reset').addEventListener('click', () => {
-	canvas = new fabric.Canvas('c');
 	createDesign(canvas, 500, 500, 50, 50);
 	resetGame();
 });

@@ -1,4 +1,6 @@
-import { firstClickColor, regularClickColor, coordinatesColor } from './colors';
+import {
+	firstClickColor, regularClickColor, coordinatesColor, backgroundColor,
+} from './colors';
 import coordinates from './coordinates';
 
 let counterClick = 0;
@@ -6,7 +8,7 @@ let counterTime = 0;
 let int1 = 0;
 
 // Define 'pre-game' status
-export let gameStage = 'pre-game';
+export let gameStage = 'pre-game'; // changable value - no const
 
 // Score function print in HTML
 function score() {
@@ -54,7 +56,6 @@ export function firstClick(canvas, e, clickedField) {
 		affectedFields = [];
 	}
 	// First click add to counter
-
 	counterClick += 1;
 	timer();
 	score();
@@ -72,7 +73,6 @@ export function firstClick(canvas, e, clickedField) {
 		const x = clickedField.x + coordinates[i][0];
 		// Y coordinate = clickedField.y coordinate + second value of each array of coordinates array
 		const y = clickedField.y + coordinates[i][1];
-
 		// Push results object in array with properties x/y and value of coordinates
 		affectedFields.push({
 			x,
@@ -108,24 +108,16 @@ export function regularClick(canvas, e, clickedField, gameOver) {
 	}
 	// If statment - if clickedField has property yellow then fill green and change
 	// the value of color propety to green
-	if (
-		clickedField.color
-		=== coordinatesColor
-	) {
-		clickedField.set(
-			'fill',
-			regularClickColor
-		);
+	if (clickedField.color === coordinatesColor) {
+		clickedField.set('fill', regularClickColor);
 		clickedField.color = regularClickColor;
 
 		// For loop trough coordinates array
 		for (let i = 0; i < coordinates.length; i += 1) {
 			// X coordinate = clickedField.x coordinate + first value of each array of coordinates array
-			const x = clickedField.x
-				+ coordinates[i][0];
+			const x = clickedField.x + coordinates[i][0];
 			// Y coordinate = clickedField.y coordinate + second value of each array of coordinates array
-			const y = clickedField.y
-				+ coordinates[i][1];
+			const y = clickedField.y + coordinates[i][1];
 			// Push results in object in array with properties x/y and value of coordinates
 			affectedFields.push(
 				{

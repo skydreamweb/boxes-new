@@ -1,6 +1,6 @@
-import backgroundColor from './colors';
+import { backgroundColor } from './colors';
 
-function createDesign(canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
+export default function createDesign(canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
 	// Sets width of this canvas instance
 	canvas.setWidth(fullWidth);
 	// Sets height of this canvas instance
@@ -37,4 +37,3 @@ function createDesign(canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
 		}
 	}
 }
-export default createDesign;

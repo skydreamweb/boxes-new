@@ -1,3 +1,4 @@
+// Defining colors
 const firstClickColor = 'blue';
 const regularClickColor = 'blue';
 const coordinatesColor = 'yellow';

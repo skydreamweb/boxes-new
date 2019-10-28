@@ -1,6 +1,6 @@
 import { fabric } from 'fabric';
 import { backgroundColor } from './colors';
-
+//
 export default function createDesign(canvas, fullWidth, fullHeight, blockWidth, blockHeight) {
 	// Sets width of this canvas instance
 	canvas.setWidth(fullWidth);

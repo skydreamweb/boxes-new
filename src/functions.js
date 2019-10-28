@@ -1,5 +1,5 @@
 import {
-	firstClickColor, regularClickColor, coordinatesColor, backgroundColor,
+	firstClickColor, regularClickColor, coordinatesColor,
 } from './colors';
 import coordinates from './coordinates';
 
@@ -20,6 +20,7 @@ function timer() {
 	document.getElementById('time').innerHTML = counterTime;
 }
 
+// Reset game function
 export function resetGame() {
 	gameStage = 'pre-game';
 	counterClick = 0;
@@ -28,7 +29,6 @@ export function resetGame() {
 	timer();
 	score();
 }
-
 
 // Game start function - Change game status - Time / Score counter
 export function gameStart() {

@@ -38,7 +38,7 @@ export function gameStart() {
 }
 
 // Game over function - Change game status
-export function gameOver() {
+export function gameEnd() {
 	gameStage = 'game-over';
 
 	// Stop timer - setInterval from gameStart function
